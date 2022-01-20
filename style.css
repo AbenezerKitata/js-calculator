@@ -4,26 +4,35 @@
     padding: 0;
 }
 :root{
-    height: 100vh;
+    min-height: 420px;
+    max-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: #f4b41a;
 }
 h1{
-    margin-top: 200px;
+    margin-top: 400px;
 }
 body{
-    height: 100vh;
+    min-height: 460px;
+    max-height: 100vh;
+    min-width: 400px;
+    margin-top: -200px;
     display: grid;
 }
+@media screen and (max-width: 342px) {
+    body {
+        height: 0px;
+    }
+  }
 #wrapper{
     background-color: #143d59;
     min-width: 340px;
     height: 400px;
     /* min-height:400px; */
-    border: 3px solid rgb(243, 190, 17);
-    border-radius: 10px;
+    border-color: transparent;
+    border-radius: 20px;
     display:grid;
     justify-items: center;
     align-items: center;
