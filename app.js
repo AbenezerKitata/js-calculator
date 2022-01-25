@@ -14,8 +14,7 @@ const btn6 = document.querySelector(".num6");
 const btn7 = document.querySelector(".num7");
 const btn8 = document.querySelector(".num8");
 const btn9 = document.querySelector(".num9");
-const equal = document.querySelector("equal");
-const par = document.querySelector(".par");
+const square = document.querySelector(".square");
 const plus = document.querySelector(".plus");
 const minus = document.querySelector(".minus");
 const multiply = document.querySelector(".multiply");
@@ -24,15 +23,81 @@ const overX = document.querySelector(".overX");
 const percent = document.querySelector(".percent");
 const point = document.querySelector(".point");
 const buttons = document.querySelectorAll(".button");
-buttons.forEach(btn => {
-    btn.addEventListener("click",(e)=>{
-        topDisplay.style.color = "white";
-    if(btn.textContent === "1/X"){
-        bottomDisplay.textContent = "1/"
-    } if(btn.textContent === "C"||btn.textContent === "="){
-        bottomDisplay.textContent = ""
-    }else
-    bottomDisplay.textContent = e.currentTarget.textContent; 
-    })
-      
+const nums = document.querySelectorAll(".nums");
+const operators = document.querySelectorAll(".operators");
+const equal = document.querySelector(".equal");
+point.addEventListener("click",()=>{
+    bottomDisplay.innerText += "."
+})
+
+clear.addEventListener("click", clearText);
+equal.addEventListener("click", evaluate);
+square.addEventListener("click", squared);
+let operatorsArray = [...operators].map((operator)=>{
+    return operator.textContent
 });
+
+
+overX.addEventListener("click", ()=>{
+    bottomDisplay.innerText += "1/"
+});
+nums.forEach(num => {
+    num.addEventListener("click",displayText)
+});
+operators.forEach(operator=>{
+    operator.addEventListener("click",displayText)
+});
+function displayText(e) {
+    bottomDisplay.innerText += `${e.currentTarget.innerText}`;
+};
+function clearText(){
+    let text = bottomDisplay.innerText;
+    topDisplay.innerText = text;
+    bottomDisplay.innerText = null;
+}
+function evaluate(){
+    let text = bottomDisplay.innerText;
+    let str = text.toString();
+    let arr = [...str];
+        if (arr.includes("+")){
+            let modArr = str.split("+");
+            console.log(modArr);
+            topDisplay.innerText = text;
+            bottomDisplay.innerText = Number(modArr[0]) + Number(modArr[1]);
+        }
+        if (arr.includes("-")){
+            let modArr = str.split("-");
+            console.log(modArr);
+            topDisplay.innerText = text;
+            bottomDisplay.innerText = Number(modArr[0]) - Number(modArr[1])
+        }
+        if (arr.includes("X")){
+            let modArr = str.split("X");
+            console.log(modArr);
+            topDisplay.innerText = text;
+            bottomDisplay.innerText = Number(modArr[0]) * Number(modArr[1])
+        }
+        if (arr.includes("/")){
+            let modArr = str.split("/");
+            console.log(modArr);
+            topDisplay.innerText = text;
+            bottomDisplay.innerText = Number(modArr[0]) / Number(modArr[1])
+        }
+        if (arr.includes("%")){
+            let modArr = str.split("%");
+            console.log(modArr);
+            topDisplay.innerText = text;
+            bottomDisplay.innerText = Number(modArr[0]) % Number(modArr[1])
+        }
+};
+function squared(){
+    let text = bottomDisplay.innerText;
+    topDisplay.innerText = text;
+    bottomDisplay.innerText = text**2;
+}
+// function fraction(){
+//     let text = bottomDisplay.innerText;
+//     topDisplay.innerText = text;
+//     bottomDisplay.innerText = Number(`1/${text}`);
+// }
+
