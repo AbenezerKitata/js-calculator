@@ -19,7 +19,7 @@ const plus = document.querySelector(".plus");
 const minus = document.querySelector(".minus");
 const multiply = document.querySelector(".multiply");
 const divide = document.querySelector(".divide");
-const overX = document.querySelector(".overX");
+const del = document.querySelector(".del");
 const percent = document.querySelector(".percent");
 const point = document.querySelector(".point");
 const buttons = document.querySelectorAll(".button");
@@ -38,8 +38,12 @@ let operatorsArray = [...operators].map((operator)=>{
 });
 
 
-overX.addEventListener("click", ()=>{
-    bottomDisplay.innerText += "1/"
+del.addEventListener("click", ()=>{
+    let text = bottomDisplay.innerText
+    let arr = [...text];
+    arr.pop();
+    let text2 = arr.toString().replace(/,/g, "")
+    bottomDisplay.innerText = text2;
 });
 nums.forEach(num => {
     num.addEventListener("click",displayText)
@@ -61,31 +65,41 @@ function evaluate(){
     let arr = [...str];
         if (arr.includes("+")){
             let modArr = str.split("+");
-            console.log(modArr);
+            if (modArr[0] === "") {
+                modArr.shift() 
+            }
             topDisplay.innerText = text;
             bottomDisplay.innerText = Number(modArr[0]) + Number(modArr[1]);
         }
         if (arr.includes("-")){
             let modArr = str.split("-");
-            console.log(modArr);
+            if (modArr[0] === "") {
+                modArr.shift() 
+            }
             topDisplay.innerText = text;
-            bottomDisplay.innerText = Number(modArr[0]) - Number(modArr[1])
+            bottomDisplay.innerText = Number(modArr[0]) - Number(modArr[1]);
         }
         if (arr.includes("X")){
             let modArr = str.split("X");
-            console.log(modArr);
+            if (modArr[0] === "") {
+                modArr.shift() 
+            }
             topDisplay.innerText = text;
             bottomDisplay.innerText = Number(modArr[0]) * Number(modArr[1])
         }
         if (arr.includes("/")){
             let modArr = str.split("/");
-            console.log(modArr);
+            if (modArr[0] === "") {
+                modArr.shift() 
+            }
             topDisplay.innerText = text;
             bottomDisplay.innerText = Number(modArr[0]) / Number(modArr[1])
         }
         if (arr.includes("%")){
             let modArr = str.split("%");
-            console.log(modArr);
+            if (modArr[0] === "") {
+                modArr.shift() 
+            }
             topDisplay.innerText = text;
             bottomDisplay.innerText = Number(modArr[0]) % Number(modArr[1])
         }
