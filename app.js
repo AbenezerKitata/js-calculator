@@ -6,25 +6,26 @@ const content = document.getElementById("content");
 const clear = document.querySelector(".clear");
 const square = document.querySelector(".square");
 const del = document.querySelector(".del");
-const percent = document.querySelector(".percent");
+const modulus = document.querySelector(".modulus");
 const point = document.querySelector(".point");
 const buttons = document.querySelectorAll(".button");
 const nums = document.querySelectorAll(".nums");
 const operators = document.querySelectorAll(".operators");
 const equal = document.querySelector(".equal");
-point.addEventListener("click", () => {
-  bottomDisplay.innerText += ".";
-});
+// point.addEventListener("click", () => {
+//   bottomDisplay.innerText += ".";
+// });
 clear.addEventListener("click", clearText);
 equal.addEventListener("click", evaluate);
 square.addEventListener("click", squared);
-del.addEventListener("click", () => {
+del.addEventListener("click", dele);
+function dele(){
   let text = bottomDisplay.innerText;
   let arr = [...text];
   arr.pop();
   let text2 = arr.toString().replace(/,/g, "");
   bottomDisplay.innerText = text2;
-});
+}
 nums.forEach((num) => {
   num.addEventListener("click", displayText);
 });
@@ -39,7 +40,6 @@ function clearText() {
   topDisplay.innerText = text;
   bottomDisplay.innerText = ``;
 }
-
 function squared() {
   let text = bottomDisplay.innerText;
   topDisplay.innerText = text;
@@ -55,9 +55,6 @@ function evaluate() {
     if (arr.includes("%")) {
       let modArr = str.split("%");
       topDisplay.innerText = text;
-      if (Number(modArr[0]) % Number(modArr[1] === NaN)) {
-        bottomDisplay.innerText = `Syntax Error!`;
-      }
       bottomDisplay.innerText = Number(modArr[0]) % Number(modArr[1]);
     }
     if (itm === "+") {
@@ -66,9 +63,6 @@ function evaluate() {
         return Number(acc) + Number(ar);
       }, 0);
       topDisplay.innerText = text;
-      if (added === NaN) {
-        bottomDisplay.innerText = `Syntax Error!`;
-      }
       bottomDisplay.innerText = added;
     }
     if (itm === "-") {
@@ -77,21 +71,15 @@ function evaluate() {
         return Number(acc) - Number(ar);
       }, 0);
       topDisplay.innerText = text;
-      if (sub === NaN) {
-        bottomDisplay.innerText = `Syntax Error!`;
-      }
       bottomDisplay.innerText = sub;
     }
-    if (itm === "X") {
+    if (itm === "×") {
       let ans = str.split(itm);
       let multiply = ans.reduce(function (acc, ar) {
         return Number(acc) * Number(ar);
       });
       console.log(multiply);
       topDisplay.innerText = text;
-      if (multiply === NaN) {
-        bottomDisplay.innerText = `Syntax Error!`;
-      }
       bottomDisplay.innerText = multiply;
     }
     if (itm === "/") {
@@ -100,17 +88,80 @@ function evaluate() {
         return Number(acc) / Number(ar);
       });
       topDisplay.innerText = text;
-      if (divide === NaN) {
-        bottomDisplay.innerText = `Syntax Error!`;
-      }
       bottomDisplay.innerText = divide;
     }
   });
 
   return splited;
-};
-bottomDisplay.addEventListener('keydown', (e)=>{
-    if (e.key === 1) {
-        
-    }
+}
+// My keyboard event listener
+document.addEventListener("keydown", function (event) {
+  if (event.key === "0") {
+    bottomDisplay.innerText += Number("0");
+  }
+  if (event.key === "1") {
+    bottomDisplay.innerText += Number("1");
+  }
+  if (event.key === "2") {
+    bottomDisplay.innerText += Number("2");
+  }
+  if (event.key === "3") {
+    bottomDisplay.innerText += Number("3");
+  }
+  if (event.key === "4") {
+    bottomDisplay.innerText += Number("4");
+  }
+  if (event.key === "5") {
+    bottomDisplay.innerText += Number("5");
+  }
+  if (event.key === "6") {
+    bottomDisplay.innerText += Number("6");
+  }
+  if (event.key === "7") {
+    bottomDisplay.innerText += Number("7");
+  }
+  if (event.key === "8") {
+    bottomDisplay.innerText += Number("8");
+  }
+  if (event.key === "9") {
+    bottomDisplay.innerText += Number("9");
+  }
+  if (event.key === '/') {
+    bottomDisplay.innerText += '/'
+  }
+  if (event.key === '*') {
+    bottomDisplay.innerText += '×'
+  }
+  if (event.key === '+') {
+    bottomDisplay.innerText += '+'
+  }
+  if (event.key === '%') {
+    bottomDisplay.innerText += '%'
+  }
+  if (event.key === '-') {
+    bottomDisplay.innerText += '-'
+  }
+  if (event.key == 'Backspace') {
+    dele()  
+  }
+  if (event.key == 'Enter') {
+    evaluate()
+  }
+  if (event.key == 'Delete') {
+    clearText()
+  }
 })
+function operate() {
+  // let addThem = text.slice(0, indexOf("+"));
+  // if (addThem){}
+  // let minusThem = text.slice(0, indexOf("-"));
+  // let MultiplyThem = text.slice(0, indexOf("×"));
+  // let divideThem = text.slice(0, indexOf("/"));
+  // function add(...nums){
+  //   let letsAdd = nums.reduce(acc, arr=>{
+  //     return acc+arr
+  //   },0)
+  // }
+
+
+}
