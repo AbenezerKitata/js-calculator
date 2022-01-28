@@ -15,8 +15,10 @@ const equal = document.querySelector(".equal");
 // point.addEventListener("click", () => {
 //   bottomDisplay.innerText += ".";
 // });
+
+
 clear.addEventListener("click", clearText);
-equal.addEventListener("click", evaluate);
+equal.addEventListener("click", add);
 square.addEventListener("click", squared);
 del.addEventListener("click", dele);
 function dele(){
@@ -35,6 +37,7 @@ operators.forEach((operator) => {
 function displayText(e) {
   bottomDisplay.innerText += `${e.currentTarget.innerText}`;
 }
+
 function clearText() {
   let text = bottomDisplay.innerText;
   topDisplay.innerText = text;
@@ -45,6 +48,7 @@ function squared() {
   topDisplay.innerText = text;
   bottomDisplay.innerText = text ** 2;
 }
+
 function evaluate() {
   let text = bottomDisplay.innerText;
   let str = text.toString();
@@ -151,17 +155,42 @@ document.addEventListener("keydown", function (event) {
     clearText()
   }
 })
-function operate() {
-  // let addThem = text.slice(0, indexOf("+"));
-  // if (addThem){}
-  // let minusThem = text.slice(0, indexOf("-"));
-  // let MultiplyThem = text.slice(0, indexOf("×"));
-  // let divideThem = text.slice(0, indexOf("/"));
-  // function add(...nums){
-  //   let letsAdd = nums.reduce(acc, arr=>{
-  //     return acc+arr
-  //   },0)
-  // }
+function add(){
+  let text = bottomDisplay.innerText;
+  let spl = /[^a-zA-Z\d\s:]/;
+  let arr = [...text];
+  let str = text.split(spl);
+  let plus = arr.indexOf("+");
+  let minus = arr.indexOf("-");
+  let times = arr.indexOf("×");
+  let divided = arr.indexOf('/');
+  let first = arr.slice(0, divided);
+  let second = arr.slice(0, times);
+  let third = arr.slice(0, plus);
+  let fourth = arr.slice(0, minus);
+  
 
+  console.log(`divide = ${first}`);
+  console.log(`multiply = ${second}`);
+  console.log(`plus = ${third}`);
+  console.log(`minus = ${fourth}`);
 
 }
+//×
+// let divide = document.querySelector(".divide")
+// divide.addEventListener("click",()=>{
+
+// });
+// let multiply = document.querySelector(".multiply")
+// multiply.addEventListener("click",()=>{
+
+// });
+// let minus = document.querySelector(".minus")
+// minus.addEventListener("click",()=>{
+
+// });
+// let addd = document.querySelector(".add")
+// addd.addEventListener("click",()=>{
+
+// });
+
