@@ -18,7 +18,7 @@ const equal = document.querySelector(".equal");
 
 
 clear.addEventListener("click", clearText);
-equal.addEventListener("click", add);
+equal.addEventListener("click", evaluate);
 square.addEventListener("click", squared);
 del.addEventListener("click", dele);
 function dele(){
@@ -34,6 +34,11 @@ nums.forEach((num) => {
 operators.forEach((operator) => {
   operator.addEventListener("click", displayText);
 });
+operators.forEach((operator) => {
+  operator.addEventListener("click", operate);
+});
+
+
 function displayText(e) {
   bottomDisplay.innerText += `${e.currentTarget.innerText}`;
 }
@@ -155,42 +160,77 @@ document.addEventListener("keydown", function (event) {
     clearText()
   }
 })
-function add(){
-  let text = bottomDisplay.innerText;
-  let spl = /[^a-zA-Z\d\s:]/;
-  let arr = [...text];
-  let str = text.split(spl);
-  let plus = arr.indexOf("+");
-  let minus = arr.indexOf("-");
-  let times = arr.indexOf("×");
-  let divided = arr.indexOf('/');
-  let first = arr.slice(0, divided);
-  let second = arr.slice(0, times);
-  let third = arr.slice(0, plus);
-  let fourth = arr.slice(0, minus);
+// function add(){
+//   let text = bottomDisplay.innerText;
+//   let spl = /[^a-zA-Z\d\s:]/;
+//   let arr = [...text];
+//   let str = text.split(spl);
+//   let plus = arr.indexOf("+");
+//   let minus = arr.indexOf("-");
+//   let times = arr.indexOf("×");
+//   let divided = arr.indexOf('/');
+//   let first = arr.slice(0, divided);
+//   let second = arr.slice(0, times);
+//   let third = arr.slice(0, plus);
+//   let fourth = arr.slice(0, minus);
   
 
-  console.log(`divide = ${first}`);
-  console.log(`multiply = ${second}`);
-  console.log(`plus = ${third}`);
-  console.log(`minus = ${fourth}`);
+//   console.log(`divide = ${first}`);
+//   console.log(`multiply = ${second}`);
+//   console.log(`plus = ${third}`);
+//   console.log(`minus = ${fourth}`);
 
+// }
+// //×
+// // let divide = document.querySelector(".divide")
+// // divide.addEventListener("click",()=>{
+
+// // });
+// // let multiply = document.querySelector(".multiply")
+// // multiply.addEventListener("click",()=>{
+
+// // });
+// // let minus = document.querySelector(".minus")
+// // minus.addEventListener("click",()=>{
+
+// // });
+// // let addd = document.querySelector(".add")
+// // addd.addEventListener("click",()=>{
+
+// // });
+function divide(array) {
+  let divide = array.reduce(function (acc, ar) {
+    return Number(acc) / Number(ar);
+  });
+  return divide
 }
-//×
-// let divide = document.querySelector(".divide")
-// divide.addEventListener("click",()=>{
+function operate(e) {
+  let sign = e.currentTarget.innerText;
+  // console.log(sign);
+  let txt =  bottomDisplay.innerText;
+  let opArr = ["+","-","/","×"]
+  let arr = [...txt];
+    let nums = arr.slice(0,arr.length-1);
+    for (let i = 0; i < nums.length; i++) {
+      if (nums[i] === opArr[i]) {
+        let spl = txt.split(opArr[i]);
+        console.log(`spl = ${spl}`);
+        if(opArr[i] === "/"){
+          let arspl = Array.from(spl).slice(0,spl.length-1);
+          let ans = divide(arspl);
+          console.log(`arspl = ${(ans)}`);
+        }
+      }
+    }
+    // console.log(nums);
+    // if(sign === "/"){
+    //   let quotient = divide(nums)
+    //   
+    // }
 
-// });
-// let multiply = document.querySelector(".multiply")
-// multiply.addEventListener("click",()=>{
-
-// });
-// let minus = document.querySelector(".minus")
-// minus.addEventListener("click",()=>{
-
-// });
-// let addd = document.querySelector(".add")
-// addd.addEventListener("click",()=>{
-
-// });
+ 
+  
+  
+ 
+}
 
