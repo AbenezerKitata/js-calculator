@@ -198,39 +198,43 @@ document.addEventListener("keydown", function (event) {
 // // addd.addEventListener("click",()=>{
 
 // // });
-function divide(array) {
-  let divide = array.reduce(function (acc, ar) {
-    return Number(acc) / Number(ar);
-  });
-  return divide
-}
-function operate(e) {
-  let sign = e.currentTarget.innerText;
-  // console.log(sign);
-  let txt =  bottomDisplay.innerText;
-  let opArr = ["+","-","/","×"]
-  let arr = [...txt];
-    let nums = arr.slice(0,arr.length-1);
-    for (let i = 0; i < nums.length; i++) {
-      if (nums[i] === opArr[i]) {
-        let spl = txt.split(opArr[i]);
-        console.log(`spl = ${spl}`);
-        if(opArr[i] === "/"){
-          let arspl = Array.from(spl).slice(0,spl.length-1);
-          let ans = divide(arspl);
-          console.log(`arspl = ${(ans)}`);
-        }
-      }
-    }
-    // console.log(nums);
-    // if(sign === "/"){
-    //   let quotient = divide(nums)
-    //   
-    // }
+// function divide(array) {
+//   let divide = array.reduce(function (acc, ar) {
+//     return Number(acc) / Number(ar);
+//   });
+//   return divide
+// }
 
- 
+// function operate(e) {
+//   let txt =  bottomDisplay.innerText;
+//   // let opArr = ["+","-","/","×"];
+//   let arr = [...txt];
+//   let sign = e.currentTarget.innerText;
+//   let a = []
   
+//   arr.splice(arr.indexOf(sign),1)
+//   for (let i = 0; i < arr.length; i++) {
+//    if (arr[i] === "/") {
+//      let test = arr.join('');
+//      a.push(test)
+//      console.log(Array.from(test));
+     
+//    }
+//    break
+   
+//   }
+//   console.log(`a = ${a}`);
   
  
-}
+
+
+//   //--------------------- console.log(`first = ${}`);--------------------------
+
+// }
+
+// function deleteItem(arra, value) { 
+//      arra.filter(function(ele){ 
+//       return ele != value; 
+//   });
+// }
 
