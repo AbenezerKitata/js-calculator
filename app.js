@@ -108,17 +108,19 @@ function evaluate() {
     }
     if (itm === "+") {
       let ans = str.split(itm);
+      console.log(`ans = ${ans}`);
       let added = ans.reduce(function (acc, ar) {
         return Number(acc) + Number(ar);
-      }, 0);
+      });
       topDisplay.innerText = text;
       bottomDisplay.innerText = added;
     }
     if (itm === "-") {
       let ans = str.split(itm);
+      console.log(`ans = ${ans}`);
       let sub = ans.reduce(function (acc, ar) {
         return Number(acc) - Number(ar);
-      }, 0);
+      });
       topDisplay.innerText = text;
       bottomDisplay.innerText = sub;
     }
@@ -176,18 +178,23 @@ document.addEventListener("keydown", function (event) {
   }
   if (event.key === "/") {
     bottomDisplay.innerText += "/";
+    divide()
   }
   if (event.key === "*") {
     bottomDisplay.innerText += "×";
+    multiply()
   }
   if (event.key === "+") {
     bottomDisplay.innerText += "+";
+    add()
   }
   if (event.key === "%") {
     bottomDisplay.innerText += "%";
   }
   if (event.key === "-") {
     bottomDisplay.innerText += "-";
+    minus();
+    
   }
   if (event.key == "Backspace") {
     dele();
@@ -199,23 +206,220 @@ document.addEventListener("keydown", function (event) {
     clearText();
   }
 });
-function add(arr) {
-  return arr.reduce((acc, ar) => {
-    Number(acc) + Number(ar);
-  }, 0);
+function add() {
+    let text = bottomDisplay.innerText;
+    let arr = Array.from(text);
+    let sign = arr.pop();
+    let str = arr.toString().replace(/,/g, "");
+    let ans = str.split("+");
+    console.log(`str = ${str}`);
+    for (let i = 0; i < str.length; i++) {
+      if (str.includes('-')) {
+        ans = rem(str)
+        let min = ans.reduce(function (acc, ar) {
+          return Number(acc) - Number(ar);
+        });
+        topDisplay.innerText = text;
+        bottomDisplay.innerText = `${min}${sign}`;
+        text =  `${min}${sign}`
+        return;
+  
+      }
+      if (str.includes('×')) {
+        ans = mu(str)
+        let mul = ans.reduce(function (acc, ar) {
+          return Number(acc) * Number(ar);
+        });
+        topDisplay.innerText = text;
+        bottomDisplay.innerText = `${mul}${sign}`;
+        text =  `${mul}${sign}`
+        return;
+  
+      }
+      if (str.includes('/')) {
+        ans = di(str)
+        let divi = ans.reduce(function (acc, ar) {
+          return Number(acc) / Number(ar);
+        });
+        topDisplay.innerText = text;
+        bottomDisplay.innerText = `${divi}${sign}`;
+        text =  `${divi}${sign}`
+  
+  return;
+      }
+      
+    }
+ 
+        let addem = ans.reduce(function (acc, ar) {
+          return Number(acc) + Number(ar);
+        });
+        topDisplay.innerText = text;
+        bottomDisplay.innerText = `${addem}${sign}`;
+        text =  `${addem}${sign}`
 }
-function minus(arr) {
-  return arr.reduce((acc, ar) => {
-    Number(acc) - Number(ar);
-  }, 0);
+function minus() {
+  let text = bottomDisplay.innerText;
+  let arr = Array.from(text);
+  let sign = arr.pop();
+  let str = arr.toString().replace(/,/g, "");
+  
+  let ans = str.split("-");
+for (let i = 0; i < str.length; i++) {
+  if (str.includes('×')) {
+    ans = mu(str)
+    let mul = ans.reduce(function (acc, ar) {
+      return Number(acc) * Number(ar);
+    });
+    topDisplay.innerText = text;
+    bottomDisplay.innerText = `${mul}${sign}`;
+    text =  `${mul}${sign}`;
+    return;
+  }
+  if (str.includes('+')) {
+    ans = sum(str)
+    let ad = ans.reduce(function (acc, ar) {
+      return Number(acc) + Number(ar);
+    });
+    topDisplay.innerText = text;
+    bottomDisplay.innerText = `${ad}${sign}`;
+    text =  `${ad}${sign}`;
+    return;
+  }
+  if (str.includes('/')) {
+    ans = di(str)
+    let divi = ans.reduce(function (acc, ar) {
+      return Number(acc) / Number(ar);
+    });
+    topDisplay.innerText = text;
+    bottomDisplay.innerText = `${divi}${sign}`;
+    text =  `${divi}${sign}`;
+    return;
+  }
+  break
+  
 }
-function divide(arr) {
-  return arr.reduce((acc, ar) => {
-    Number(acc) / Number(ar);
-  });
+      let min = ans.reduce(function (acc, ar) {
+        return Number(acc) - Number(ar);
+      });
+      topDisplay.innerText = text;
+      bottomDisplay.innerText = `${min}${sign}`;
+      text =  `${min}${sign}`
 }
-function multiply(arr) {
-  return arr.reduce((acc, ar) => {
-    Number(acc) * Number(ar);
-  });
+function divide() {
+  let text = bottomDisplay.innerText;
+  let arr = Array.from(text);
+  let sign = arr.pop();
+  let str = arr.toString().replace(/,/g, "");
+  let ans = str.split("/");
+  for (let i = 0; i < str.length; i++) {
+    if (str.includes('-')) {
+      ans = rem(str)
+      let min = ans.reduce(function (acc, ar) {
+        return Number(acc) - Number(ar);
+      });
+      topDisplay.innerText = text;
+      bottomDisplay.innerText = `${min}${sign}`;
+      text =  `${min}${sign}`;
+      return;
+    }
+    if (str.includes('+')) {
+      ans = sum(str)
+      let ad = ans.reduce(function (acc, ar) {
+        return Number(acc) + Number(ar);
+      });
+      topDisplay.innerText = text;
+      bottomDisplay.innerText = `${ad}${sign}`;
+      text =  `${ad}${sign}`;
+      return;
+    }
+    if (str.includes('×')) {
+      ans = mu(str)
+      let mul = ans.reduce(function (acc, ar) {
+        return Number(acc) * Number(ar);
+      });
+      topDisplay.innerText = text;
+      bottomDisplay.innerText = `${mul}${sign}`;
+      text =  `${mul}${sign}`;
+      return;
+    }
+    break;
+    
+  }
+
+      let divide = ans.reduce(function (acc, ar) {
+        return Number(acc) / Number(ar);
+      });
+      topDisplay.innerText = text;
+      bottomDisplay.innerText = `${divide}${sign}`;
+      text =  `${divide}${sign}`
+}
+function multiply() {
+  let text = bottomDisplay.innerText;
+    let arr = Array.from(text);
+    let sign = arr.pop();
+    let str = arr.toString().replace(/,/g, "");
+    let ans = str.split("×");
+    for (let i = 0; i < str.length; i++) {
+      if (str.includes('-')) {
+        ans = rem(str)
+        let min = ans.reduce(function (acc, ar) {
+          return Number(acc) - Number(ar);
+        });
+        topDisplay.innerText = text;
+        bottomDisplay.innerText = `${min}${sign}`;
+        text =  `${min}${sign}`
+  ;
+  return;
+      }
+      if (str.includes('+')) {
+        ans = sum(str)
+        let ad = ans.reduce(function (acc, ar) {
+          return Number(acc) + Number(ar);
+        });
+        topDisplay.innerText = text;
+        bottomDisplay.innerText = `${ad}${sign}`;
+        text =  `${ad}${sign}`
+  ;  return;
+      }
+      if (str.includes('/')) {
+        ans = di(str)
+        let divi = ans.reduce(function (acc, ar) {
+          return Number(acc) / Number(ar);
+        });
+        topDisplay.innerText = text;
+        bottomDisplay.innerText = `${divi}${sign}`;
+        text =  `${divi}${sign}`
+  ;
+  return;
+      }
+      break;
+      
+    }
+
+        let multi = ans.reduce(function (acc, ar) {
+          return Number(acc) * Number(ar);
+        });
+        topDisplay.innerText = text;
+        bottomDisplay.innerText = `${multi}${sign}`;
+        text =  `${multi}${sign}`
+}
+function sum(txt) {
+  let arr = txt.split("+");
+  return arr;
+
+}
+function rem(txt) {
+  let arr = txt.split("-");
+  return arr;
+
+}
+function di(txt) {
+  let arr = txt.split("/");
+  return arr;
+
+}
+function mu(txt) {
+  let arr = txt.split("-");
+  return arr;
+
 }
